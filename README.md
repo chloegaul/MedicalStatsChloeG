@@ -33,6 +33,7 @@ gamma<- seq(0.1 , 1, 0.05) #Gamma needs to be larger than 0, create set of 10 va
 
 LambGamCombo <- expand.grid(Lambda = lambda, Gamma = gamma) #Find all possible combinations of those values. 
 
+nrow(LambGamCombo)
 
 ProbofRejectedNull <- function(x, n1, n2, theta){ #combinations inputted into the function as x = (lambda, gamma)
   
@@ -159,11 +160,7 @@ ExpectedSampleSize(lambda = 0.35, gamma = 0.95, n1 = 25, n2 =50)
 
 ExpectedSampleSize(lambda = 0.35, gamma = 1, n1 = 25, n2 =50)
 
-#The smallest example sample size is 38.091, around 38 participants. 
-
-
-
-#Evaluation, 
+ 
 
 #Adjust the code for type I and type II errors to allow for 2 interim analyses. 
 
@@ -217,11 +214,10 @@ ProbofRejectedNull2Interims <- function(x, n1, n2, n3, theta){ #The trial now ha
 }
 
 #Calculate the type I and type II errors using the trials we have simulated. 
-#Keep n1 = 25, n2 = 50 and add n3 = 75. 
 
-TypeI_2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 = 25, n2 = 50, n3 = 75, theta =0.5) #type I error is proportion of trials where null is rejected when theta = theta0.
+TypeI_2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 = 20, n2 = 35, n3 = 50, theta =0.5) #type I error is proportion of trials where null is rejected when theta = theta0.
 
-RejectedUnderTheta1_2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 =25, n2 =50, n3 = 75, theta =0.7)
+RejectedUnderTheta1_2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 =20, n2 =35, n3 = 50, theta =0.7)
 TypeII_2Interims <- 1 - RejectedUnderTheta1 #Type II error is proportion of trials where the null was rejected, when theta = theta1, subtracted from 1.
 
 TypeIAndTypeII_2Interims <- cbind(TypeI_2Interims, TypeII_2Interims)
@@ -284,13 +280,14 @@ nrow(ChosenLambdaGamma2Interims) #Calculate how many combinations of lambda and 
 
 ChosenLambdaGamma2Interims
 
+
 #We test out 3 values to see what the expected sample size seems to be generally 
 
-ExpectedSampleSize_2Interims(lambda = 0.25 , gamma = 0.15, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize_2Interims(lambda = 0.25 , gamma = 0.15, n1 = 20, n2 = 35, n3 = 50)
 
-ExpectedSampleSize_2Interims(lambda = 0.3 , gamma = 1, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize_2Interims(lambda = 0.3 , gamma = 1, n1 = 20, n2 = 35, n3 = 50)
 
-ExpectedSampleSize_2Interims(lambda = 0.1 , gamma = 0.8, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize_2Interims(lambda = 0.1 , gamma = 0.8, n1 = 20, n2 = 35, n3 = 50)
 
 
 
