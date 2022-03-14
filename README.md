@@ -148,6 +148,56 @@ ExpectedSampleSize(lambda = 0.9, gamma = 1, n1 = 25, n2 =50)
 #We then want to see what happens to elements such as: Possible lambdas and gammas to use and minimum expected sample size. 
 #If it requires less participants to achieve the same power, we may conclude that using two interim analysis could be more efficient.
 
+#We keep the same options for lambda and gamma. We want to keep everything the same except for number of intermin analyses, so we can see the effect that it has. 
+#Instead of n1 and n2, we will have n1, n2 and n3. where n2 = n3-n1 and n1 = n3-n2. n3 is the total number of participants we end up using
+
+
+ProbofRejectedNull2Interims <- function(x, n1, n2, n3, theta){ #The function now has 3 sets of participants, so 3 arguments for sample size
+  
+  lambda <- x[1]
+  gamma <- x[2]
+  
+  M_Stage1 <- 10^5 #We want 10^5 simulated trials, in order to have a large sample for Monte Carlo.
+  
+  y1 <- rbinom(M_Stage1, n1, theta)  #Generate a 'number of responses from first stage of trial' variable for each M in M_Stage1
+  
+  a1 <- 0.5 + y1 #Work out parameters for posterior, 0.5 has been used for a0
+  b1 <- 0.5 + n1 - y1 #Work out parameters for posterior, 0.5 has been used for b0
+  
+  probfut1 <- pbeta(0.5, a1, b1) #Find probability of futility using the posterior. 
+  
+  threshold1 <- 1 - lambda*(n1/n3)^gamma
+  
+  #The trials that pass this stage will then go to the second stage 
+  
+  M_Stage2 <- sum(probfut1 <= threshold1)
+  
+  #We now have M_Stage2 trials that are being assessed again. 
+  
+  y2 <- rbinom(M_Stage2, n2-n1, theta) #Generate a 'number of responses from second stage of trial' variable for each M in M_Stage2
+  
+  a2 <- 0.5 + y1 + y2 #Updating the posterior 
+  b2 <- 0.5 + n2 - y2 - y1 #Updating the posterior  
+  
+  probfut2 <- pbeta(0.5, a2, b2) #New probability of futility based on new posterior. 
+  
+  threshold2 <- 1 - lambda*(n2/n3)^gamma #New threshold to compare probability of futility for second stage of trial to.
+  
+  M_Stage3 <- sum(probfut2 <= threshold2) #M_Stage3 trials pass the stage and recruit more patients.
+  
+  y3 <- rbinom(M_Stage3, n3-n2, theta) #Generate a 'number of responses from second stage of trial' variable for each M in M_Stage3
+  
+  a3 <- 0.5 + y1 + y2 + y3
+  b3 <- 0.5 + n3 - y3-y2-y1
+  
+  probfut3 <- pbeta(0.5, a3, b3) #New probability of futility based on new posterior. 
+  
+  threshold3 <- 1 - lambda*(n3/n3)^gamma #New threshold to compare probability of futility for second stage of trial to
+  
+  rejectednulls2Interims <- sum(probfut1 <= threshold1 & probfut2 <= threshold2 & probfut3 <= threshold3) #The Null is rejected if all thresholds are not crossed.
+  
+  return(rejectednulls/M_Stage1) #Finding proportion of trials that rejected the null
+}
 
 
 
