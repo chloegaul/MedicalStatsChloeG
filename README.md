@@ -26,4 +26,14 @@ samplesize(0.05, 0.2, 0.5, 0.7)
 
 #This tells us we need a sample size of at least 38.64098, which we will round up to 39 participants.
 
+#We want to find the type I and type II error for various values of lambda and gamma in our threshold function. This will guide us on the decision of which lambda and gamma to use.
+
+#We do this through monte carlo methods: Finding the proportion of a set of simulated trials where the null was rejected.
+
+#To find the type I error, we will find the proportion of trials where the null is rejected when theta = theta0. 
+
+#To find the type II error, we find the proportion of trials where the null was rejected, when theta = theta1, and minus this from 1. 
+
+
+
 
