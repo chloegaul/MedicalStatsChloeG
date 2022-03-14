@@ -54,8 +54,8 @@ ProbofRejectedNull <- function(x, n1, n2, theta){ #combinations inputted into th
   
   y2 <- rbinom(M_Stage2, n2-n1, theta) #Generate a 'number of responses from second stage of trial' variable for each M in M_Stage2
   
-  a2 <- 0.5 + y1 + y2 #Updating the posterior 
-  b2 <- 0.5 + n2 - y2 - y1 #Updating the posterior  
+  a2 <- 0.5 + y2 #Updating the posterior 
+  b2 <- 0.5 + (n2 - (y1 + y2)) #Updating the posterior  
   
   probfut2 <- pbeta(0.5, a2, b2) #New probability of futility based on new posterior. 
   
@@ -67,15 +67,15 @@ ProbofRejectedNull <- function(x, n1, n2, theta){ #combinations inputted into th
 }
 
 
-
-LambGamCombo
-
 #To find the type I error, we will find the proportion of trials where the null is rejected when theta = theta0. 
 
 #To find the type II error, we find the proportion of trials where the null was rejected, when theta = theta1, and minus this from 1.
 
-TypeII <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 = 25, n2 = 50, theta =0.5)
-TypeI <- 1 -apply(LambGamCombo, 1, ProbofRejectedNull, n1 =25, n2 =50, theta =0.7)
+TypeI <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 = 25, n2 = 50, theta =0.5) #type I error is proportion of trials where null is rejected when theta = theta0.
+
+RejectedUnderTheta1 <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 =25, n2 =50, theta =0.7)
+
+TypeII <- 1 - RejectedUnderTheta1 #Type II error is proportion of trials where the null was rejected, when theta = theta1, subtracted from 1.
 
 TypeIAndTypeII <- cbind(TypeI, TypeII)
 TypeIAndTypeII
