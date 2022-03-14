@@ -82,8 +82,8 @@ ProbofRejectedNull <- function(x, n1, n2, theta){
 
 LambGamCombo
 
-TypeII <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 = 25, n2 = 50, theta =0.5)
-TypeI <- 1 -apply(LambGamCombo, 1, ProbofRejectedNull, n1 =25, n2 =50, theta =0.7)
+TypeII <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 = 30, n2 = 60, theta =0.5)
+TypeI <- 1 -apply(LambGamCombo, 1, ProbofRejectedNull, n1 =30, n2 =60, theta =0.7)
 
 TypeIAndTypeII <- cbind(TypeI, TypeII)
 TypeIAndTypeII
@@ -128,20 +128,20 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
 
 ChosenLambdaGamma
 
-ExpectedSampleSize(lambda = 0.8, gamma = 0.1, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.1, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.8, gamma = 0.2, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.2, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.8, gamma = 0.3, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.3, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.8, gamma = 0.4, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.4, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.5, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.6, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.7, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.8, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.9, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 1, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.1, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.1, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.2, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.2, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.3, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.3, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.4, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.4, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.5, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.6, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.7, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.8, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.9, n1 = 30, n2 =60)
+ExpectedSampleSize(lambda = 0.9, gamma = 1, n1 = 30, n2 =60)
 
 
 
