@@ -91,25 +91,27 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) { #Define a function that 
   
   for (i in 1:M) {
   
-    theta <- rbeta(1, 0.5, 0.5) #Generate a value of theta from its prior, defined as a0 = 0.5 and b0 = 0.7
+    theta <- rbeta(1, 0.5, 0.5) #Generate a value of theta from its prior, defined as a0 = 0.5 and b0 = 0.5
+    
     y1 <- rbinom(1, n1, theta) #Find the number of responses from the trial, using its distribution.
     
     a1 <- 0.5 + y1 #Calculate posterior parameters
     b1 <- 0.5 + n1 - y1 #Calculate posterior paraeters
     
-    probfut1_SampleSize <- pbeta(0.5, a1, b1)
+    probfut1_SampleSize <- pbeta(0.5, a1, b1) #Calculate probability of futility based on posterior
     
-    threshold1_SampleSize <- 1 - lambda * (n1 / n2)^gamma
+    threshold1_SampleSize <- 1 - lambda * (n1 / n2)^gamma #Calculate threshold, based on sample size so far
     
     if (probfut1_SampleSize > threshold1_SampleSize) {
       N[i] <- n1
     } else {
       N[i] <- n2
-    }
+    } #Assign sample size for that trial to the each row of empty matrix. N takes 2 values: n1 if trial is stopped after interim analysis, and n2 otherwise.
   }
   
   return(mean(N))
   }
+
 
 ChosenLambdaGamma
 
