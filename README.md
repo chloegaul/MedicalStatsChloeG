@@ -35,5 +35,24 @@ samplesize(0.05, 0.2, 0.5, 0.7)
 #To find the type II error, we find the proportion of trials where the null was rejected, when theta = theta1, and minus this from 1. 
 
 
+lambda <- seq(0.1, 1, 0.05) #Lambda is between 0 and 1. 
+gamma<- seq(0.1 , 1, 0.05) #Gamma needs to be larger than 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
