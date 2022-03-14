@@ -280,6 +280,8 @@ ExpectedSampleSize_2Interims <- function(lambda, gamma, n1, n2, n3) {
 
 ChosenLambdaGamma2Interims
 
+nrow(ChosenLambdaGamma)
+
 
 #We test out 3 values to see what the expected sample size seems to be generally 
 
