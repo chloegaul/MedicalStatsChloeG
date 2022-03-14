@@ -115,7 +115,7 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
     probfut1_SampleSize <- pbeta(0.5, a1, b1)
     
     threshold1_SampleSize <- lambda * (n1 / n2)^gamma
-    .
+    
     if (probfut1_SampleSize > threshold1_SampleSize) {
       N[i] <- n1
     } else {
@@ -126,13 +126,22 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
   return(mean(N))
   }
 
+ChosenLambdaGamma
 
-
-
-
-
-
-
+ExpectedSampleSize(lambda = 0.8, gamma = 0.1, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.1, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.2, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.2, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.3, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.3, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.8, gamma = 0.4, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.4, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.5, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.6, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.7, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.8, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 0.9, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.9, gamma = 1, n1 = 25, n2 =50)
 
 
 
