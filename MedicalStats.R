@@ -280,7 +280,9 @@ ExpectedSampleSize_2Interims <- function(lambda, gamma, n1, n2, n3) {
   return(mean(N)) # Return the estimated expected sample size, using monte Carlo Methods. 
 }
 
-#We test out 3 values to see what the expected sample size seems to be generally 
+#We test out 3 values to see what the expected sample size seems to be generally
+
+ChosenLambdaGamma2Interims
 
 ExpectedSampleSize_2Interims(lambda = 0.25 , gamma = 0.15, n1 = 25, n2 = 50, n3 = 75)
 
