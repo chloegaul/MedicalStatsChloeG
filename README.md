@@ -280,6 +280,8 @@ nrow(ChosenLambdaGamma2Interims) #Calculate how many combinations of lambda and 
 
 ChosenLambdaGamma2Interims
 
+nrow(ChosenLambdaGamma2Interims)
+
 
 #We test out 3 values to see what the expected sample size seems to be generally 
 
@@ -288,6 +290,8 @@ ExpectedSampleSize_2Interims(lambda = 0.25 , gamma = 0.15, n1 = 20, n2 = 35, n3 
 ExpectedSampleSize_2Interims(lambda = 0.3 , gamma = 1, n1 = 20, n2 = 35, n3 = 50)
 
 ExpectedSampleSize_2Interims(lambda = 0.1 , gamma = 0.8, n1 = 20, n2 = 35, n3 = 50)
+
+
 
 
 
