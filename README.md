@@ -35,14 +35,14 @@ samplesize(0.05, 0.2, 0.5, 0.7)
 #To find the type II error, we find the proportion of trials where the null was rejected, when theta = theta1, and minus this from 1. 
 
 
-lambda <- seq(0.1, 1, 0.05) #Lambda is between 0 and 1. 
-gamma<- seq(0.1 , 1, 0.05) #Gamma needs to be larger than 0
+lambda <- seq(0.1, 1, 0.1) #Lambda is between 0 and 1. 
+gamma<- seq(0.1 , 1, 0.1) #Gamma needs to be larger than 0
 
 LambGamCombo <- expand.grid(Lambda = lambda, Gamma = gamma) #Find all possible combinations of those values. 
 
 #In our function we want to use a combination of lambda and gamma expressed as x = (lambda, gamma). This needs to be an argument of the function.
 
-ProbofRejectedNull <- function(x, n1, n2, theta, a0, b0){
+ProbofRejectedNull <- function(x, n1, n2, theta){
   
   lambda <- x[1]
   gamma <- x[2]
@@ -51,8 +51,8 @@ ProbofRejectedNull <- function(x, n1, n2, theta, a0, b0){
   
   y1 <- rbinom(M_Stage1, n1, theta)  #Generate a 'number of responses from first stage of trial' variable for each M in M_Stage1
   
-  a1 <- a0 + y1 #Work out parameters for posterior
-  b1 <- b0 + n1 - y1 #Work out parameters for posterior
+  a1 <- 0.5 + y1 #Work out parameters for posterior, 0.5 has been used for a0
+  b1 <- 0.5 + n1 - y1 #Work out parameters for posterior, 0.5 has been used for b0
   
   probfut1 <- pbeta(0.5, a1, b1) #Find probability of futility using the posterior. 
   
@@ -66,8 +66,8 @@ ProbofRejectedNull <- function(x, n1, n2, theta, a0, b0){
   
   y2 <- rbinom(M_Stage2, n2-n1, theta) #Generate a 'number of responses from second stage of trial' variable for each M in M_Stage2
   
-  a2 <- a0 + y1 + y2 #Updating the posterior 
-  b2 <- b0 + n2 - y2 - y1 #Updating the posterior  
+  a2 <- 0.5 + y1 + y2 #Updating the posterior 
+  b2 <- 0.5 + n2 - y2 - y1 #Updating the posterior  
   
   probfut2 <- pbeta(0.5, a2, b2) #New probability of futility based on new posterior. 
   
@@ -78,8 +78,23 @@ ProbofRejectedNull <- function(x, n1, n2, theta, a0, b0){
   return(rejectednulls/M_Stage1) #Finding proportion of trials that rejected the null
 }
 
-
 #So we now have a function that will give us the propability of rejecting the null. 
+
+LambGamCombo
+
+TypeII <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 = 25, n2 = 50, theta =0.5)
+TypeI <- 1 -apply(LambGamCombo, 1, ProbofRejectedNull, n1 =25, n2 =50, theta =0.7)
+
+TypeIAndTypeII <- cbind(TypeI, TypeII)
+TypeIAndTypeII
+
+ChosenCombos <- which(TypeIAndTypeII[ ,1] <= 0.5 & TypeIAndTypeII[ ,2] <= 0.2)
+ChosenCombos
+
+ChosenLambdaGamma <- LambGamCombo[ChosenCombos, ]
+ChosenLambdaGamma
+
+#So now we have a list of gamma and lambda that will give us the desired operating characteristics.
 
 
 
