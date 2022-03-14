@@ -273,6 +273,35 @@ nrow(ChosenLambdaGamma2Interims)
 }
 
 
+ChosenLambdaGamma2Interims
+ExpectedSampleSize2Interims(lambda = 0.7 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.2, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.2, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.3, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.3, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.4, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.4, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.5, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.5, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.6, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.6, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.7, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.7, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.8, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.8, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.9, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.9, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 1, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 1, n1 = 25, n2 = 50, n3 = 75)
+
+
+
+#So our minimum expected sample size for this is actually slightly more than for a 2 interim process, to get the same type I and type II error rates. 
+
+
+
 
 
 
