@@ -211,7 +211,7 @@ ProbofRejectedNull2Interims <- function(x, n1, n2, n3, theta){ #The trial now ha
   
   threshold3_2Interims <- 1 - lambda*(n3/n3)^gamma #New threshold to compare probability of futility for second stage of trial to
   
-  rejectednulls2Interims <- sum(probfut1_2Interims <= threshold1_2Interims & probfut2_2Interims <= threshold2_2Interims & probfut3_2Interims <= threshold3_2Interims) #The Null is rejected if all thresholds are not crossed.
+  rejectednulls2Interims <- sum(probfut1_2Interims <= threshold1_2Interims & probfut2_2Interims <= threshold2_2Interims & probfut3_2Interims <= threshold3_2Interims) #The Null is rejected if all thresholds are not crossed at each step.
   
   return(rejectednulls2Interims/M_Stage1) #Finding proportion of trials that rejected the null
 }
@@ -227,8 +227,6 @@ TypeII_2Interims <- 1 - RejectedUnderTheta1 #Type II error is proportion of tria
 TypeIAndTypeII_2Interims <- cbind(TypeI_2Interims, TypeII_2Interims)
 
 ChosenCombos2Interims <- which(TypeIAndTypeII_2Interims[ ,1] <= 0.05 & TypeIAndTypeII_2Interims[ ,2] <= 0.2)
-
-length(ChosenCombos2Interims) #Finding how many more/less combinations of lambda and gamma give us the desired type I and type II error.
 
 ChosenLambdaGamma2Interims <- LambGamCombo[ChosenCombos2Interims, ] #Extract values of lambda and gamma that give us desired error rates
 
@@ -284,10 +282,15 @@ nrow(ChosenLambdaGamma2Interims) #Calculate how many combinations of lambda and 
   return(mean(N)) # Return the estimated expected sample size, using monte Carlo Methods. 
 }
 
+ChosenLambdaGamma2Interims
 
-ExpectedSampleSize_2Interims(lambda = 0.7 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
+#We test out 3 values to see what the expected sample size seems to be generally 
 
+ExpectedSampleSize_2Interims(lambda = 0.25 , gamma = 0.15, n1 = 25, n2 = 50, n3 = 75)
 
+ExpectedSampleSize_2Interims(lambda = 0.3 , gamma = 1, n1 = 25, n2 = 50, n3 = 75)
+
+ExpectedSampleSize_2Interims(lambda = 0.1 , gamma = 0.8, n1 = 25, n2 = 50, n3 = 75)
 
 
 
