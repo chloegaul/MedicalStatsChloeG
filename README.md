@@ -200,7 +200,20 @@ ProbofRejectedNull2Interims <- function(x, n1, n2, n3, theta){ #The function now
 }
 
 
+#We now do the same process as before, calculating the type I and type II errors using the trials we have simulated. 
+#The difference is that these trials have 2 interim analyses rather than one. 
 
+TypeII2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 = 25, n2 = 50,n3 = 75, theta =0.5)
+TypeI2Interims <- 1 -apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 =25, n2 =50, n3 = 75, theta =0.7)
+
+TypeIAndTypeII2Interims <- cbind(TypeI2Interims, TypeII2Interims)
+TypeIAndTypeII2Interims
+
+ChosenCombos2Interims <- which(TypeIAndTypeII2Interims[ ,1] <= 0.5 & TypeIAndTypeII2Interims[ ,2] <= 0.2)
+ChosenCombos2Interims
+
+ChosenLambdaGamma2Interims <- LambGamCombo[ChosenCombos2Interims, ]
+ChosenLambdaGamma2Interims
 
 
 
