@@ -143,6 +143,11 @@ ExpectedSampleSize(lambda = 0.9, gamma = 0.8, n1 = 30, n2 =60)
 ExpectedSampleSize(lambda = 0.9, gamma = 0.9, n1 = 30, n2 =60)
 ExpectedSampleSize(lambda = 0.9, gamma = 1, n1 = 30, n2 =60)
 
+#For Evaluation, we want to look into what happens if we do this with two interim analyses rather than just one. 
+#We want to adjust the code to allow for 2 interim analyses, so 3 sets of patients we are testing. 
+#We then want to see what happens to elements such as: Possible lambdas and gammas to use and minimum expected sample size. 
+#If it requires less participants to achieve the same power, we may conclude that using two interim analysis could be more efficient.
+
 
 
 
