@@ -38,6 +38,8 @@ samplesize(0.05, 0.2, 0.5, 0.7)
 lambda <- seq(0.1, 1, 0.05) #Lambda is between 0 and 1. 
 gamma<- seq(0.1 , 1, 0.05) #Gamma needs to be larger than 0
 
+LambGamCombo <- expand.grid(Lambda = lambda, Gamma = gamma) #Find all possible combinations of those values
+
 
 
 
