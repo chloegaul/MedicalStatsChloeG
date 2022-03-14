@@ -22,14 +22,14 @@ samplesize <- function(alpha, beta, theta0, theta1){ #Arguments of function: typ
 
 samplesize(0.05, 0.2, 0.5, 0.7)
 
-#So we need n >= 38.64098, which we will round up to 39 participants.
+#So this suggests we need at least n = 38.64098, which we will round up to 39 participants. We choose n1 = 25, n1 = 50. 
 
 #Find type I and type II error for various values of lambda and gamma, for the purposes of guiding choices of lambda and gamma. 
 
 #We use monte carlo methods: Finding the proportion of a set of simulated trials where the null was rejected. 
 
-lambda <- seq(0.1, 1, 0.1) #Lambda is between 0 and 1, create set of 10 values for lambda in this range
-gamma<- seq(0.1 , 1, 0.1) #Gamma needs to be larger than 0, create set of 10 values for gamma in this range 
+lambda <- seq(0.1, 1, 0.05) #Lambda is between 0 and 1, create set of 10 values for lambda in this range
+gamma<- seq(0.1 , 1, 0.05) #Gamma needs to be larger than 0, create set of 10 values for gamma in this range 
 
 LambGamCombo <- expand.grid(Lambda = lambda, Gamma = gamma) #Find all possible combinations of those values. 
 
@@ -76,6 +76,7 @@ TypeI <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 = 25, n2 = 50, theta =0.5
 RejectedUnderTheta1 <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 =25, n2 =50, theta =0.7)
 
 TypeII <- 1 - RejectedUnderTheta1 #Type II error is proportion of trials where the null was rejected, when theta = theta1, subtracted from 1.
+TypeII
 
 TypeIAndTypeII <- cbind(TypeI, TypeII) #Form matrix of type 1 and type 2 errors for combinations of lambda and gamma. 
 
@@ -112,23 +113,10 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) { #Define a function that 
   return(mean(N))
   }
 
-
 ChosenLambdaGamma
 
-ExpectedSampleSize(lambda = 0.8, gamma = 0.1, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.1, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.8, gamma = 0.2, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.2, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.8, gamma = 0.3, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.3, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.8, gamma = 0.4, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.4, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.5, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.6, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.7, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.8, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 0.9, n1 = 25, n2 =50)
-ExpectedSampleSize(lambda = 0.9, gamma = 1, n1 = 25, n2 =50)
+ExpectedSampleSize(lambda = 0.3, gamma = 0.1, n1 = 25, n2 =50)
+
 
 #For Evaluation, we want to look into what happens if we do this with two interim analyses rather than just one. 
 #We want to adjust the code to allow for 2 interim analyses, so 3 sets of patients we are testing. 
