@@ -96,6 +96,33 @@ ChosenLambdaGamma
 
 #So now we have a list of gamma and lambda that will give us the desired operating characteristics.
 
+#We now calculate the expected sample size with each one of these errors, and find the smallest expected sample size. 
+
+ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
+  
+  M <- 10^5 #M simulations
+  
+  Ns <- rep(NA, M) #Creating a vector in which we can store the expected sample sizes.
+  
+  for (i in 1:M) {
+  
+    theta <- rbeta(1, 0.5, 0.5) #Generate a value of theta from its prior, defined as a0 = 0.5 and b0 = 0.7
+    y1 <- rbinom(1, n1, theta) #Find the number of responses from the trial, using its distribution.
+    
+    a1 <- 0.5 + y1 #Calculate posterior parameters
+    b1 <- 0.5 + n1 - y1 #Calculate posterior paraeters
+    
+    probfut1_SampleSize <- pbeta(0.5, a1, b1)
+    
+    threshold1_SampleSize <- lambda * (n1 / n2)^gamma
+    .
+    if (probfut1_SampleSize > threshold1_SampleSize) {
+      Ns[i] <- n1
+    } else {
+      Ns[i] <- n2
+    }
+  }}
+
 
 
 
