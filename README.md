@@ -196,14 +196,14 @@ ProbofRejectedNull2Interims <- function(x, n1, n2, n3, theta){ #The function now
   
   rejectednulls2Interims <- sum(probfut1 <= threshold1 & probfut2 <= threshold2 & probfut3 <= threshold3) #The Null is rejected if all thresholds are not crossed.
   
-  return(rejectednulls/M_Stage1) #Finding proportion of trials that rejected the null
+  return(rejectednulls2Interims/M_Stage1) #Finding proportion of trials that rejected the null
 }
 
 
 #We now do the same process as before, calculating the type I and type II errors using the trials we have simulated. 
 #The difference is that these trials have 2 interim analyses rather than one. 
 
-TypeII2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 = 25, n2 = 50,n3 = 75, theta =0.5)
+TypeII2Interims <- apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 = 25, n2 = 50,n3 = 75, theta =0.5) 
 TypeI2Interims <- 1 -apply(LambGamCombo, 1, ProbofRejectedNull2Interims, n1 =25, n2 =50, n3 = 75, theta =0.7)
 
 TypeIAndTypeII2Interims <- cbind(TypeI2Interims, TypeII2Interims)
@@ -212,8 +212,13 @@ TypeIAndTypeII2Interims
 ChosenCombos2Interims <- which(TypeIAndTypeII2Interims[ ,1] <= 0.5 & TypeIAndTypeII2Interims[ ,2] <= 0.2)
 ChosenCombos2Interims
 
+length(ChosenCombos2Interims) #Finding how many more/less combinations of lambda and gamma give us the desired type I and type II error.
+length(ChosenCombos)
+
 ChosenLambdaGamma2Interims <- LambGamCombo[ChosenCombos2Interims, ]
 ChosenLambdaGamma2Interims
+
+nrow(ChosenLambdaGamma2Interims)
 
 
 
