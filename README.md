@@ -220,7 +220,7 @@ ChosenLambdaGamma2Interims
 
 nrow(ChosenLambdaGamma2Interims)
 
-
+#We now need to adapt our code for expected sample size, to extend to 2 interim analyses. The total sample size can now take 3 values: n1, n2 and n3. 
 
 
 
