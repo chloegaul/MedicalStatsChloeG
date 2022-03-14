@@ -102,7 +102,7 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
   
   M <- 10^5 #M simulations
   
-  Ns <- rep(NA, M) #Creating a vector in which we can store the expected sample sizes.
+  N <- rep(NA, M) #Creating a vector in which we can store the expected sample sizes.
   
   for (i in 1:M) {
   
@@ -117,11 +117,15 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
     threshold1_SampleSize <- lambda * (n1 / n2)^gamma
     .
     if (probfut1_SampleSize > threshold1_SampleSize) {
-      Ns[i] <- n1
+      N[i] <- n1
     } else {
-      Ns[i] <- n2
+      N[i] <- n2
     }
-  }}
+  }
+  
+  return(mean(N))
+  }
+
 
 
 
