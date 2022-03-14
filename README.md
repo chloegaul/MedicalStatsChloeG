@@ -242,28 +242,38 @@ nrow(ChosenLambdaGamma2Interims)
     
     threshold1_SampleSize2Interims <- 1 - lambda * (n1 / n3)^gamma
     
-    y2 <- rbinom(1, n2, theta)
+    y2 <- rbinom(1, n2-n1, theta)
     
-    a2 <- 0.5 + y1 + y2
-    b2 <- 0.5 + n1 - y1 - y2
+    a2 <- 0.5 + y2
+    b2 <- 0.5 + (n2 - (y1 + y2))
     
     probfut2_SampleSize <- pbeta(0.5, a2, b2)
     
-    threshold2_SampleSize <- lambda * (n2 / n3)^gamma
+    threshold2_SampleSize2Interims <- 1 - lambda * (n2 / n3)^gamma #So now we have 2 probabilities of futility, and 2 thresholds that these have to not cross in order to reject the null.
+    #The sample size for each trial will be different based on whether or not we make it past each interim decision.
     
-    if (probfut1_SampleSize > threshold1_SampleSize) {
+    if (probfut1_SampleSize > threshold1_SampleSize2Interims) {
       N[i] <- n1
-    } else if(probfut1_SampleSize <= threshold1_SampleSize & probfut2_SampleSize > threshold2_SampleSize) {
-      N[i] <- n2
-      }else{
-        N[i] <- n3
-      }
-      }
+    } 
     
+    else{
+    
+    if (probfut2_SampleSize > threshold2_SampleSize2Interims) {
+      N[i] <- n2
+    }
+    else{
+    N[i] <- n3
+    }
+    } 
+  
   }
   
+  # Return the estimated expected sample size and its estimated standard error.
   return(mean(N))
 }
+
+
+
 
 
 
