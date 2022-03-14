@@ -227,15 +227,12 @@ TypeII_2Interims <- 1 - RejectedUnderTheta1 #Type II error is proportion of tria
 TypeIAndTypeII_2Interims <- cbind(TypeI_2Interims, TypeII_2Interims)
 
 ChosenCombos2Interims <- which(TypeIAndTypeII_2Interims[ ,1] <= 0.05 & TypeIAndTypeII_2Interims[ ,2] <= 0.2)
-ChosenCombos2Interims
 
 length(ChosenCombos2Interims) #Finding how many more/less combinations of lambda and gamma give us the desired type I and type II error.
-length(ChosenCombos)
 
-ChosenLambdaGamma2Interims <- LambGamCombo[ChosenCombos2Interims, ]
-ChosenLambdaGamma2Interims
+ChosenLambdaGamma2Interims <- LambGamCombo[ChosenCombos2Interims, ] #Extract values of lambda and gamma that give us desired error rates
 
-nrow(ChosenLambdaGamma2Interims)
+nrow(ChosenLambdaGamma2Interims) #Calculate how many combinations of lambda and gamma will give desired error rates.
 
 #We now need to adapt our code for expected sample size, to extend to 2 interim analyses. The total sample size can now take 3 values: n1, n2 and n3. 
 
