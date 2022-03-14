@@ -6,6 +6,21 @@
 
 #For alpha = type 1 error, beta = type 2 error, theta0 = theta under null hypothesis, theta1 = theta under alternate hypothesis, we create a function:
 
+samplesize <- function(alpha, beta, theta0, theta1){
+  
+  nvarestimate <- (theta0*(1 - theta0))  #n x (variance of estimate), to get numerator of variance.
+  
+  deltasquared <- (theta1 - theta0)^2    #delta = theta1 -theta0
+  
+  numerator <- nvarestimate*(qnorm(1-alpha) - qnorm(beta))^2 #numerator of expression for n 
+  
+  n <- numerator/deltasquared  #Calculate n 
+  
+  return(n)
+  
+}
+
+
 
 
 
