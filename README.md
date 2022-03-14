@@ -113,9 +113,52 @@ ExpectedSampleSize <- function(lambda, gamma, n1, n2) { #Define a function that 
   return(mean(N))
   }
 
-ChosenLambdaGamma
+ChosenLambdaGamma 
+
+#Apply ExpectedSampleSize function using these combinations of lambda and gamma
 
 ExpectedSampleSize(lambda = 0.3, gamma = 0.1, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.1, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.15, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.2, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.25, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.3, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.35, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.4, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.45, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.5, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.55, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.6, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.65, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.7, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.75, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.8, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.85, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.9, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 0.95, n1 = 25, n2 =50)
+
+ExpectedSampleSize(lambda = 0.35, gamma = 1, n1 = 25, n2 =50)
+
+#The smallest example sample size is 38.091, around 38 participants. 
+
 
 
 #For Evaluation, we want to look into what happens if we do this with two interim analyses rather than just one. 
