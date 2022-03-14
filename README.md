@@ -20,7 +20,10 @@ samplesize <- function(alpha, beta, theta0, theta1){
   
 }
 
+#Now we input the values we have been given, to find the minimum sample size we need.
 
+samplesize(0.05, 0.2, 0.5, 0.7)
 
+#This tells us we need a sample size of at least 38.64098, which we will round up to 39 participants.
 
 
