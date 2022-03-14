@@ -234,10 +234,9 @@ ChosenLambdaGamma2Interims <- LambGamCombo[ChosenCombos2Interims, ] #Extract val
 
 nrow(ChosenLambdaGamma2Interims) #Calculate how many combinations of lambda and gamma will give desired error rates.
 
-#We now need to adapt our code for expected sample size, to extend to 2 interim analyses. The total sample size can now take 3 values: n1, n2 and n3. 
+#Adapt function for expected sample size for 2 interim analyses. 
 
-
-  ExpectedSampleSize2Interims <- function(lambda, gamma, n1, n2, n3) {
+  ExpectedSampleSize_2Interims <- function(lambda, gamma, n1, n2, n3) {
   
   M <- 10^5 #M simulations
   
@@ -247,72 +246,47 @@ nrow(ChosenLambdaGamma2Interims) #Calculate how many combinations of lambda and 
     
     theta <- rbeta(1, 0.5, 0.5) #Generate a value of theta from its prior, defined as a0 = 0.5 and b0 = 0.5
     
-    y1 <- rbinom(1, n1, theta) #Find the number of responses from the trial, using its distribution.
+    y1 <- rbinom(1, n1, theta) #Generate a number of responses from first stage of trial
     
     a1 <- 0.5 + y1 #Calculate posterior parameters
     b1 <- 0.5 + n1 - y1 #Calculate posterior paraeters
     
-    probfut1_SampleSize <- pbeta(0.5, a1, b1)
+    probfut1_2InterimsSS <- pbeta(0.5, a1, b1) #Calculate probability of futility using posterior distribution of theta
     
-    threshold1_SampleSize2Interims <- 1 - lambda * (n1 / n3)^gamma
+    threshold1_2InterimsSS <- 1 - lambda * (n1 / n3)^gamma #Calculate threshold to compare probfut1_2InterimsSS to
     
-    y2 <- rbinom(1, n2-n1, theta)
+    y2 <- rbinom(1, n2-n1, theta) #Generate number of responses from second stage of trial
     
-    a2 <- 0.5 + y2
-    b2 <- 0.5 + (n2 - (y1 + y2))
+    a2 <- 0.5 + y2 #Calculate posterior parameters
+    b2 <- 0.5 + (n2 - (y1 + y2)) #Calculate posterior paraeters
     
-    probfut2_SampleSize <- pbeta(0.5, a2, b2)
+    probfut2_2InterimsSS <- pbeta(0.5, a2, b2) #Calculate probability of futility using updated posterior distribution of theta
     
-    threshold2_SampleSize2Interims <- 1 - lambda * (n2 / n3)^gamma #So now we have 2 probabilities of futility, and 2 thresholds that these have to not cross in order to reject the null.
-    #The sample size for each trial will be different based on whether or not we make it past each interim decision.
+    threshold2_2InterimsSS <- 1 - lambda * (n2 / n3)^gamma #Calculate threshold to compare probfut2_2InterimsSS to
     
-    if (probfut1_SampleSize > threshold1_SampleSize2Interims) {
+    if (probfut1_2InterimsSS > threshold1_2InterimsSS) { #Stop trial if probability exceeds threshold, only n1 patients given treatment
       N[i] <- n1
     } 
     
     else{
     
-    if (probfut2_SampleSize > threshold2_SampleSize2Interims) {
+    if (probfut2_2InterimsSS > threshold2_2InterimsSS) { #Stop trial if probability exceeds second threshold, n2 patients given treatment
       N[i] <- n2
     }
     else{
-    N[i] <- n3
+    N[i] <- n3 #First two thresholds are passed, so full sample size, n3 patients are given treatment. 
     }
     } 
   
   }
   
-  # Return the estimated expected sample size and its estimated standard error.
-  return(mean(N))
+  
+  return(mean(N)) # Return the estimated expected sample size, using monte Carlo Methods. 
 }
 
 
-ChosenLambdaGamma2Interims
-ExpectedSampleSize2Interims(lambda = 0.7 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.2, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.2, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.3, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.3, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.4, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.4, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.5, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.5, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.6, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.6, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.7, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.7, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.8, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.8, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 0.9, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 0.9, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.8 , gamma = 1, n1 = 25, n2 = 50, n3 = 75)
-ExpectedSampleSize2Interims(lambda = 0.9 , gamma = 1, n1 = 25, n2 = 50, n3 = 75)
+ExpectedSampleSize_2Interims(lambda = 0.7 , gamma = 0.1, n1 = 25, n2 = 50, n3 = 75)
 
-
-
-#So our minimum expected sample size for this is actually slightly more than for a 2 interim process, to get the same type I and type II error rates. 
 
 
 
