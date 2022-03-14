@@ -77,20 +77,13 @@ RejectedUnderTheta1 <- apply(LambGamCombo, 1, ProbofRejectedNull, n1 =25, n2 =50
 
 TypeII <- 1 - RejectedUnderTheta1 #Type II error is proportion of trials where the null was rejected, when theta = theta1, subtracted from 1.
 
-TypeIAndTypeII <- cbind(TypeI, TypeII)
-TypeIAndTypeII
+TypeIAndTypeII <- cbind(TypeI, TypeII) #Form matrix of type 1 and type 2 errors for combinations of lambda and gamma. 
 
-ChosenCombos <- which(TypeIAndTypeII[ ,1] <= 0.5 & TypeIAndTypeII[ ,2] <= 0.2)
-ChosenCombos
+ChosenCombos <- which(TypeIAndTypeII[ ,1] <= 0.05 & TypeIAndTypeII[ ,2] <= 0.2) #Choose rows that satisfy constraints on type I and II errors
 
-ChosenLambdaGamma <- LambGamCombo[ChosenCombos, ]
-ChosenLambdaGamma
+ChosenLambdaGamma <- LambGamCombo[ChosenCombos, ] #Extract combinations that gives us desired error rates.
 
-#So now we have a list of gamma and lambda that will give us the desired operating characteristics.
-
-#We now calculate the expected sample size with each one of these errors, and find the smallest expected sample size. 
-
-ExpectedSampleSize <- function(lambda, gamma, n1, n2) {
+ExpectedSampleSize <- function(lambda, gamma, n1, n2) { #Define a function that calculates expected sample size.
   
   M <- 10^5 #M simulations
   
